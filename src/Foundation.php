@@ -31,7 +31,7 @@ class Foundation extends Container
 
         $this->setConfig($config);
 
-        if ($this->config['debug'] ?? false) {
+        if ($this->getConfig('debug')?? false) {
             error_reporting(E_ALL);
         }
 
@@ -69,7 +69,7 @@ class Foundation extends Container
 
         $logger = new Logger($this->getConfig()['log']['name'] ?? 'foundation');
 
-        if (!$this->getConfig()['debug'] ?? false || defined('PHPUNIT_RUNNING')) {
+        if (!$this->getConfig('debug')?? false || defined('PHPUNIT_RUNNING')) {
             $logger->pushHandler(new NullHandler());
         } elseif (($this->getConfig()['log']['handler'] ?? null) instanceof HandlerInterface) {
             $logger->pushHandler($this->getConfig()['log']['handler']);
